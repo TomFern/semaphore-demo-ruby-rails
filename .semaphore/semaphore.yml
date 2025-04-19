@@ -43,6 +43,10 @@ blocks:
         commands:
           - '#sem-version ruby 2.7.3'
           - '#sem-version node 14.16.1'
+          - 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash'
+          - source "$HOME/.nvm/nvm.sh"
+          - nvm install 22
+          - node --version
           - checkout
           - cache restore
           - bundle install
