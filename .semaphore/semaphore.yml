@@ -73,6 +73,11 @@ blocks:
             image: 'registry.semaphoreci.com/ruby:2.7'
           - name: db
             image: 'registry.semaphoreci.com/postgres:17.2'
+            env_vars:
+              - name: POSTGRES_PASSWORD
+                value: rails-demo-password
+              - name: POSTGRES_USERNAME
+                value: rails-demo-username
   - name: Integration tests
     dependencies:
       - Unit tests
