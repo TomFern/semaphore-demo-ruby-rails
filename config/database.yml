@@ -25,7 +25,7 @@ default: &default
 
 development:
   <<: *default
-  database: demo-rails5_development
+  database: demo-rails_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -59,7 +59,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: demo-rails5_test
+  database: demo-rails_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -82,6 +82,6 @@ test:
 #
 production:
   <<: *default
-  database: demo-rails5_production
-  username: demo-rails5
-  password: <%= ENV['DEMO_RAILS5_DATABASE_PASSWORD'] %>
+  database: demo-rails_production
+  username: demo-rails-username
+  password: demo-rails-password
