@@ -1,9 +1,12 @@
 version: v1.0
-name: Demo Rails 6 app
+name: Demo Rails 8 app
 agent:
   machine:
-    type: e1-standard-2
-    os_image: ubuntu2004
+    type: s1-kubernetes
+    os_image: ''
+  containers:
+    - name: main
+      image: 'registry.semaphoreci.com/ruby:2.7'
 blocks:
   - name: Setup
     dependencies: []
@@ -11,8 +14,8 @@ blocks:
       jobs:
         - name: bundle
           commands:
-            - sem-version ruby 2.7.3
-            - sem-version node 14.16.1
+            - '#sem-version ruby 2.7.3'
+            - '#sem-version node 14.16.1'
             - checkout
             - cache restore
             - bundle install
@@ -24,8 +27,8 @@ blocks:
       jobs:
         - name: check style + security
           commands:
-            - sem-version ruby 2.7.3
-            - sem-version node 14.16.1
+            - '#sem-version ruby 2.7.3'
+            - '#sem-version node 14.16.1'
             - checkout
             - cache restore
             - bundle install
@@ -38,13 +41,13 @@ blocks:
     task:
       prologue:
         commands:
-          - sem-version ruby 2.7.3
-          - sem-version node 14.16.1
+          - '#sem-version ruby 2.7.3'
+          - '#sem-version node 14.16.1'
           - checkout
           - cache restore
           - bundle install
           - cache store
-          - sem-service start postgres
+          - '#sem-service start postgres'
           - 'bundle exec rake db:setup'
       jobs:
         - name: RSpec - model tests
@@ -56,7 +59,16 @@ blocks:
       epilogue:
         always:
           commands:
-            - "[[ -f junit.xml ]] && test-results publish --name \"🧪 Unit tests\" junit.xml"
+            - "[[ -f junit.xml ]] && test-results publish --name \"\U0001F9EA Unit tests\" junit.xml"
+      agent:
+        machine:
+          type: s1-kubernetes
+          os_image: ''
+        containers:
+          - name: main
+            image: 'registry.semaphoreci.com/ruby:2.7'
+          - name: db
+            image: 'registry.semaphoreci.com/postgres:17.2'
   - name: Integration tests
     dependencies:
       - Unit tests
@@ -72,14 +84,13 @@ blocks:
       jobs:
         - name: RSpec - feature specs
           commands:
-            - sem-service start postgres
+            - '#sem-service start postgres'
             - 'bundle exec rake db:setup'
             - bundle exec rspec spec/features
       epilogue:
         always:
           commands:
-            - "[[ -f junit.xml ]] && test-results publish --name \"🏗️ Integration tests\" junit.xml"
-
+            - "[[ -f junit.xml ]] && test-results publish --name \"\U0001F3D7️ Integration tests\" junit.xml"
 after_pipeline:
   task:
     jobs:
