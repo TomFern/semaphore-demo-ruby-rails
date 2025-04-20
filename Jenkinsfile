@@ -30,6 +30,24 @@ pipeline {
           sh 'bundle exec brakeman'
       }
     }
+    stage('Unit tests') {
+      parallel {
+        stage('Model tests') {
+          steps {
+              sh 'mkdir -p $HOME'
+              sh 'bundle exec rake db:setup'
+              sh 'bundle exec rspec spec/models'
+          }
+        }
+        stage('Controller tests') {
+          steps {
+              sh 'mkdir -p $HOME'
+              sh 'bundle exec rake db:setup'
+              sh 'bundle exec rspec spec/controllers'
+          }
+        }
+      }
+    }
   }
 }
 
