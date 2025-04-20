@@ -77,8 +77,12 @@ blocks:
     task:
       prologue:
         commands:
-          - sem-version ruby 2.7.3
-          - sem-version node 14.16.1
+          - '#sem-version ruby 2.7.3'
+          - '#sem-version node 14.16.1'
+          - 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash'
+          - source "$HOME/.nvm/nvm.sh"
+          - nvm install 22
+          - node --version
           - checkout
           - cache restore
           - bundle install
@@ -93,6 +97,13 @@ blocks:
         always:
           commands:
             - "[[ -f junit.xml ]] && test-results publish --name \"\U0001F3D7️ Integration tests\" junit.xml"
+      agent:
+        machine:
+          type: s1-kubernetes
+          os_image: ''
+        containers:
+          - name: main
+            image: 'registry.semaphoreci.com/ruby:2.7'
 after_pipeline:
   task:
     jobs:
