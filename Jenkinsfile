@@ -48,6 +48,16 @@ pipeline {
         }
       }
     }
+
+  stages {
+    stage('Integration tests') {
+      steps {
+          sh 'mkdir -p $HOME'
+          sh 'bundle exec rake db:setup'
+          sh 'bundle exec rspec spec/features'
+        }
+      }
+    }
   }
 }
 
