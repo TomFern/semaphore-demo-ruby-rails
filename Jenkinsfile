@@ -29,6 +29,7 @@ pipeline {
     }
 
     stage('Linters') {
+      steps {
         cache(caches: [
           arbitraryFileCache(
             path: 'vendor/cache',
@@ -45,6 +46,7 @@ pipeline {
           sh 'bundle exec rubocop'
           sh 'bundle exec brakeman'
         }
+      }
     }
   }
 }
