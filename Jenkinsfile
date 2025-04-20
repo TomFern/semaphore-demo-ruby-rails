@@ -1,8 +1,11 @@
 pipeline {
             agent {
-                docker { image 'registry.semaphoreci.com/ruby:2.7' }
+                docker { image 'registry.semaphoreci.com/ruby:2.7-node-browsers' }
             }
 
+    environment {
+        HOME = "/tmp/build"
+      }
   stages {
     stage('Restore cache') {
       steps {
@@ -19,6 +22,7 @@ pipeline {
             cacheValidityDecidingFile: 'Gemfile.lock'
           )
         ]) {
+          sh 'mkdir -p $HOME'
           sh 'bundle install'
           }
       }
