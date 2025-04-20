@@ -12,13 +12,8 @@ pipeline {
       steps {
         cache(caches: [
           arbitraryFileCache(
-            path: 'vendor/cache',
+            path: 'vendor',
             cacheName: 'gem-cache',
-            cacheValidityDecidingFile: 'Gemfile.lock'
-          ),
-          arbitraryFileCache(
-            path: 'vendor/bundle',
-            cacheName: 'bundle-cache',
             cacheValidityDecidingFile: 'Gemfile.lock'
           )
         ]) {
@@ -30,22 +25,9 @@ pipeline {
 
     stage('Linters') {
       steps {
-        cache(caches: [
-          arbitraryFileCache(
-            path: 'vendor/cache',
-            cacheName: 'gem-cache',
-            cacheValidityDecidingFile: 'Gemfile.lock'
-          ),
-          arbitraryFileCache(
-            path: 'vendor/bundle',
-            cacheName: 'bundle-cache',
-            cacheValidityDecidingFile: 'Gemfile.lock'
-          )
-        ]) {
           sh 'mkdir -p $HOME'
           sh 'bundle exec rubocop'
           sh 'bundle exec brakeman'
-        }
       }
     }
   }
