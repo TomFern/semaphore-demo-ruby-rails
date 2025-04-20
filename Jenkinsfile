@@ -13,7 +13,6 @@ pipeline {
                 docker { image 'registry.semaphoreci.com/ruby:2.7' }
             }
 
-        stage('Setup') {
             steps {
                 // Use the stash/unstash plugin to cache the vendor directory
                 cache(path: 'vendor/bundle', key: "${env.JOB_NAME}-${hashFiles('Gemfile.lock')}") {
