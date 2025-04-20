@@ -1,15 +1,15 @@
 pipeline {
-            agent {
-                docker { image 'registry.semaphoreci.com/ruby:2.7-node-browsers' }
-            }
+  agent {
+      docker { image 'registry.semaphoreci.com/ruby:2.7-node-browsers' }
+  }
 
-    environment {
-        HOME = "/tmp/build"
-      }
+  environment {
+      HOME = "/tmp/build"
+  }
+
   stages {
-    stage('Restore cache') {
+    stage('Install gems') {
       steps {
-        // restore both the raw gems and the installed bundle
         cache(caches: [
           arbitraryFileCache(
             path: 'vendor/cache',
@@ -24,14 +24,27 @@ pipeline {
         ]) {
           sh 'mkdir -p $HOME'
           sh 'bundle install'
-          }
+        }
       }
     }
 
-    stage('Test') {
-      steps {
-        sh 'bundle exec rake test'
-      }
+    stage('Linters') {
+        cache(caches: [
+          arbitraryFileCache(
+            path: 'vendor/cache',
+            cacheName: 'gem-cache',
+            cacheValidityDecidingFile: 'Gemfile.lock'
+          ),
+          arbitraryFileCache(
+            path: 'vendor/bundle',
+            cacheName: 'bundle-cache',
+            cacheValidityDecidingFile: 'Gemfile.lock'
+          )
+        ]) {
+          sh 'mkdir -p $HOME'
+          sh 'bundle exec rubocop'
+          sh 'bundle exec brakeman'
+        }
     }
   }
 }
