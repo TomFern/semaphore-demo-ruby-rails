@@ -18,25 +18,9 @@ pipeline {
             cacheName: 'bundle-cache',
             cacheValidityDecidingFile: 'Gemfile.lock'
           )
-        ])
-      }
-    }
-
-    stage('Install gems') {
-      steps {
-        sh '''
-          bundle install
-        '''
-      }
-    }
-
-    stage('Save cache') {
-      steps {
-        // save both caches again under the same keys
-        cache(caches: [
-          arbitraryFileCache(path: 'vendor/cache', cacheName: 'gem-cache'),
-          arbitraryFileCache(path: 'vendor/bundle', cacheName: 'bundle-cache')
-        ])
+        ]) {
+          sh 'bundle install'
+          }
       }
     }
 
