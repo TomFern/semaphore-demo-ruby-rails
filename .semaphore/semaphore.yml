@@ -43,10 +43,10 @@ blocks:
         commands:
           - '#sem-version ruby 2.7.3'
           - '#sem-version node 14.16.1'
-          - 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash'
-          - source "$HOME/.nvm/nvm.sh"
-          - nvm install 22
-          - node --version
+          - '#curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash'
+          - '#source "$HOME/.nvm/nvm.sh"'
+          - '#nvm install 22'
+          - '#node --version'
           - checkout
           - cache restore
           - bundle install
@@ -70,7 +70,7 @@ blocks:
           os_image: ''
         containers:
           - name: main
-            image: 'registry.semaphoreci.com/ruby:2.7'
+            image: 'registry.semaphoreci.com/ruby:2.7-node-browsers'
   - name: Integration tests
     dependencies:
       - Unit tests
@@ -79,9 +79,9 @@ blocks:
         commands:
           - '#sem-version ruby 2.7.3'
           - '#sem-version node 14.16.1'
-          - 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash'
-          - source "$HOME/.nvm/nvm.sh"
-          - nvm install 22
+          - '#curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash'
+          - '#source "$HOME/.nvm/nvm.sh"'
+          - '#nvm install 22'
           - node --version
           - checkout
           - cache restore
@@ -103,7 +103,7 @@ blocks:
           os_image: ''
         containers:
           - name: main
-            image: 'registry.semaphoreci.com/ruby:2.7'
+            image: 'registry.semaphoreci.com/ruby:2.7-node-browsers'
 after_pipeline:
   task:
     jobs:
