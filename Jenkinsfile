@@ -57,7 +57,6 @@ pipeline {
           junit 'junit.xml'
       }
     }
-  }
 
     stage('Build') {
       steps {
@@ -75,16 +74,17 @@ pipeline {
           archiveArtifacts artifacts: 'log/*.log', allowEmptyArchive: true
       }
     }
+  }
 
-    post {
-      always {
-        cleanWs()
-      }
-      success {
-        echo 'Build completed successfully!'
-      }
-      failure {
-        echo 'Build failed!'
+  post {
+    always {
+      cleanWs()
+    }
+    success {
+      echo 'Build completed successfully!'
+    }
+    failure {
+      echo 'Build failed!'
     }
   }
 }
