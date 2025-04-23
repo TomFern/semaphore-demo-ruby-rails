@@ -25,18 +25,18 @@ pipeline {
 
     stage('Linters') {
       steps {
-          sh 'mkdir -p $HOME'
           sh 'bundle exec rubocop'
           sh 'bundle exec brakeman'
       }
     }
+
+    stage('DB Setup') {
+      steps {
+            sh 'bundle exec rake db:setup'
+        }
+    }
+
     stage('Unit tests') {
-      stage('DB Setup') {
-        steps {
-              sh 'mkdir -p $HOME'
-              sh 'bundle exec rake db:setup'
-          }
-      }
       parallel {
         stage('Model tests') {
           steps {
@@ -53,8 +53,7 @@ pipeline {
 
     stage('Integration tests') {
       steps {
-          sh 'mkdir -p $HOME'
-          sh 'bundle exec rake db:setup'
+          // sh 'bundle exec rake db:setup'
           sh 'bundle exec rspec spec/features'
           junit 'junit.xml'
       }
