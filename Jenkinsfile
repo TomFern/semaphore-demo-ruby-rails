@@ -53,7 +53,6 @@ pipeline {
 
     stage('Integration tests') {
       steps {
-          // sh 'bundle exec rake db:setup'
           sh 'bundle exec rspec spec/features'
           junit 'junit.xml'
       }
