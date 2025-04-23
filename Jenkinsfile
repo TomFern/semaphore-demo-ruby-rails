@@ -58,19 +58,8 @@ pipeline {
       }
     }
 
-    stage('Build') {
+    stage('Archive logs') {
       steps {
-          sh 'mkdir -p $HOME'
-          sh 'bundle exec rails assets:precompile'
-          sh 'bundle exec rake build'
-          sh 'tar -czf application.tar.gz public vendor tmp'
-      }
-    }
-    
-    stage('Archive artifacts') {
-      steps {
-          archiveArtifacts artifacts: 'application.tar.gz', fingerprint: true
-          archiveArtifacts artifacts: 'coverage/**/*', allowEmptyArchive: true
           archiveArtifacts artifacts: 'log/*.log', allowEmptyArchive: true
       }
     }
