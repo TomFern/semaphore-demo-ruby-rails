@@ -31,18 +31,20 @@ pipeline {
       }
     }
     stage('Unit tests') {
+      stage('DB Setup') {
+        steps {
+              sh 'mkdir -p $HOME'
+              sh 'bundle exec rake db:setup'
+          }
+      }
       parallel {
         stage('Model tests') {
           steps {
-              sh 'mkdir -p $HOME'
-              sh 'bundle exec rake db:setup'
               sh 'bundle exec rspec spec/models'
           }
         }
         stage('Controller tests') {
           steps {
-              sh 'mkdir -p $HOME'
-              sh 'bundle exec rake db:setup'
               sh 'bundle exec rspec spec/controllers'
           }
         }
