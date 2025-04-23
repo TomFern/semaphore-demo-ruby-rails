@@ -71,8 +71,6 @@ blocks:
         containers:
           - name: main
             image: 'registry.semaphoreci.com/ruby:2.7'
-          - name: db
-            image: 'registry.semaphoreci.com/postgres:17.2'
   - name: Integration tests
     dependencies:
       - Unit tests
