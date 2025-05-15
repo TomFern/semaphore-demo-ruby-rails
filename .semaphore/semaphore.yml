@@ -24,7 +24,7 @@ blocks:
             - bundle install
             - cache store
             - test-results command-metrics REPORT.md
-            - '#artifact push job -d .semaphore/REPORT.md README.md'
+            - artifact push job -d .semaphore/REPORT.md REPORT.md
             - '#artifact push workflow -d .semaphore/REPORT.md README.md'
   - name: Code scanning
     dependencies:
