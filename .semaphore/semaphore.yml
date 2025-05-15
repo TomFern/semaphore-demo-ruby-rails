@@ -24,8 +24,9 @@ blocks:
         commands:
           - >-
             wget -o test-results
-            "https://storage.googleapis.com/yqv4dexbsfz-x48nbyah2t42e9is6y/artifacts/workflows/d6653c20-a0c1-480a-b0a1-3fe25da25e3d/bin/test-results?Expires=1747310585&GoogleAccessId=artifacthub%40semaphore2-prod-artifacts.iam.gserviceaccount.com&Signature=SF1bj%2FI%2FtQbD4ADCeYwuBEVAnmhywb1WjQPeR4JzfYuKWvgmMOZCLHBYOFTyUQdks43OwMmGS8qBJ3Wbm7%2FMHs1mfg4OBR5ZYHOSrSkwsSdqtCcIOLGKRLFpb6bXonTX3%2BzpYPuFxrrtuFhM%2FxRdkdd7GjMGs1SqFCuqO5JeqfmhPcz8WMvwJeSl7MG5U9Lo9lDmBhQ9zwAkdwx5eeeEO0tx%2BdWE%2FmMgZg%2FQRzh4FTFZgUp4t8uXRkVnz76YNnZtkVAUI5USAMXZY%2FiV8WyVNeNPb9756M2ism1iX%2Bcr7lz8EgYwwBOo9hMiDiCp2atjwuv4snILoAlCAcT6CL0OVA%3D%3D"
+            'https://storage.googleapis.com/yqv4dexbsfz-x48nbyah2t42e9is6y/artifacts/workflows/d6653c20-a0c1-480a-b0a1-3fe25da25e3d/bin/test-results?Expires=1747310585&GoogleAccessId=artifacthub%40semaphore2-prod-artifacts.iam.gserviceaccount.com&Signature=SF1bj%2FI%2FtQbD4ADCeYwuBEVAnmhywb1WjQPeR4JzfYuKWvgmMOZCLHBYOFTyUQdks43OwMmGS8qBJ3Wbm7%2FMHs1mfg4OBR5ZYHOSrSkwsSdqtCcIOLGKRLFpb6bXonTX3%2BzpYPuFxrrtuFhM%2FxRdkdd7GjMGs1SqFCuqO5JeqfmhPcz8WMvwJeSl7MG5U9Lo9lDmBhQ9zwAkdwx5eeeEO0tx%2BdWE%2FmMgZg%2FQRzh4FTFZgUp4t8uXRkVnz76YNnZtkVAUI5USAMXZY%2FiV8WyVNeNPb9756M2ism1iX%2Bcr7lz8EgYwwBOo9hMiDiCp2atjwuv4snILoAlCAcT6CL0OVA%3D%3D'
           - sudo mv test-results /usr/local/bin/test-results
+          - sudo chmod a+x /usr/local/bin/test-results
   - name: Code scanning
     dependencies:
       - Setup
