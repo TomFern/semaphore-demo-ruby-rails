@@ -18,8 +18,7 @@ blocks:
             - bundle install
             - cache store
             - '#test-results command-metrics REPORT.md'
-            - cp README.md REPORT.md
-            - artifact push job REPORT.md
+            - artifact push job -d README.md REPORT.md
   - name: Code scanning
     dependencies:
       - Setup
