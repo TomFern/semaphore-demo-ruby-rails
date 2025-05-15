@@ -17,7 +17,8 @@ blocks:
             - cache restore
             - bundle install
             - cache store
-            - test-results command-metrics REPORT.md
+            - '#test-results command-metrics REPORT.md'
+            - cp README.md REPORT.md
             - artifact push job REPORT.md
   - name: Code scanning
     dependencies:
