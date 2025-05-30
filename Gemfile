@@ -44,6 +44,7 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec'
+  gem 'bundler-audit'
   gem 'next_rails'
 
   # be able to demonstrate mysql config on Semaphore
