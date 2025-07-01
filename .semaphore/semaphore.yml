@@ -85,9 +85,11 @@ blocks:
       jobs:
         - name: RSpec - feature specs
           commands:
-            - '#sem-service start postgres'
+            - sem-service start postgres
             - 'bundle exec rake db:setup'
             - bundle exec rspec spec/features
+            - test-results resource-metrics REPORT.md
+            - artifact push job -d .semaphore/REPORT.md REPORT.md
       epilogue:
         always:
           commands:
