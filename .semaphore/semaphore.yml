@@ -17,8 +17,8 @@ blocks:
       jobs:
         - name: bundle
           commands:
-            - '#sem-version ruby 2.7.3'
-            - '#sem-version node 14.16.1'
+            - sem-version ruby 2.7.3
+            - sem-version node 14.16.1
             - checkout
             - cache restore
             - bundle install
@@ -33,8 +33,8 @@ blocks:
       jobs:
         - name: check style + security
           commands:
-            - '#sem-version ruby 2.7.3'
-            - '#sem-version node 14.16.1'
+            - sem-version ruby 2.7.3
+            - sem-version node 14.16.1
             - checkout
             - cache restore
             - bundle install
@@ -47,8 +47,8 @@ blocks:
     task:
       prologue:
         commands:
-          - '#sem-version ruby 2.7.3'
-          - '#sem-version node 14.16.1'
+          - sem-version ruby 2.7.3
+          - sem-version node 14.16.1
           - 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash'
           - source "$HOME/.nvm/nvm.sh"
           - nvm install 22
@@ -57,7 +57,7 @@ blocks:
           - cache restore
           - bundle install
           - cache store
-          - '#sem-service start postgres'
+          - sem-service start postgres
           - 'bundle exec rake db:setup'
       jobs:
         - name: RSpec - model tests
