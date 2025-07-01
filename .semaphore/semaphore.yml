@@ -2,13 +2,6 @@ version: v1.0
 name: Demo Rails 8 app
 agent:
   machine:
-<<<<<<< HEAD
-    type: s1-kubernetes
-    os_image: ''
-  containers:
-    - name: main
-      image: 'registry.semaphoreci.com/ruby:2.7'
-=======
     type: e1-standard-2
     os_image: ubuntu2004
 global_job_config:
@@ -17,7 +10,6 @@ global_job_config:
       - artifact pull project test-results
       - sudo mv test-results /usr/local/bin/test-results
       - sudo chmod a+x /usr/local/bin/test-results
->>>>>>> 98d19c32088c732dd465c089d6dccb5543ffc34c
 blocks:
   - name: Setup
     dependencies: []
